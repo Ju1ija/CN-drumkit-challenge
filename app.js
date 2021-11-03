@@ -1,75 +1,67 @@
-const aKey = document.getElementById("aKey");
-const sKey = document.getElementById("sKey");
-const dKey = document.getElementById("dKey");
-const fKey = document.getElementById("fKey");
-const gKey = document.getElementById("gKey");
-const hKey = document.getElementById("hKey");
-const jKey = document.getElementById("jKey");
-const kKey = document.getElementById("kKey");
-const lKey = document.getElementById("lKey");
-
-
 const letterCodes = [65, 83, 68, 70, 71, 72, 74, 75, 76];
 const letterSounds = ["boom", "clap", "hihat", "kick", "openhat", "ride", "snare", "tink", "tom"];
 
+// Key events
+
 document.addEventListener("keydown", (e) => {
-  if (letterCodes.includes(e.which)) {
-    let sound = letterSounds[letterCodes.indexOf(e.which)];
-    document.getElementById(`${sound}`).pause();
-    document.getElementById(`${sound}`).currentTime = 0;
-    document.getElementById(`${sound}`).play();
-  }
+  let sound = letterSounds[letterCodes.indexOf(e.which)];
+  document.getElementById(`${sound}`).pause();
+  document.getElementById(`${sound}`).currentTime = 0;
+  document.getElementById(`${sound}`).play();
 });
 
-aKey.addEventListener("click", () => {
-  document.getElementById("boom").pause();
-  document.getElementById("boom").currentTime = 0;
-  document.getElementById("boom").play();
+document.onkeydown = scaleUpKey;
+document.onkeyup = scaleDownKey;
+
+function scaleUpKey(e) {
+  document.getElementById(`${e.which}`).style.transform = "scale(1.3)";
+  document.getElementById(`${e.which}`).style.color = "#FFFFFF";
+  document.getElementById(`${e.which}`).style.fontWeight = "700";
+}
+
+function scaleDownKey(e) {
+  document.getElementById(`${e.which}`).style.transform = "scale(1)";
+  document.getElementById(`${e.which}`).style.color = "#000000";
+  document.getElementById(`${e.which}`).style.fontWeight = "500";
+}
+
+// Mouse events
+
+document.addEventListener("click", (e) => {
+  let code = parseInt(e.path[1].id);
+  let sound = letterSounds[letterCodes.indexOf(code)];
+  document.getElementById(`${sound}`).pause();
+  document.getElementById(`${sound}`).currentTime = 0;
+  document.getElementById(`${sound}`).play();
 });
 
-sKey.addEventListener("click", () => {
-  document.getElementById("clap").pause();
-  document.getElementById("clap").currentTime = 0;
-  document.getElementById("clap").play();
-});
+document.onmousedown = scaleUpMouseClick;
+document.onmouseup = scaleDownMouseClick;
+document.onmouseover = scaleUpMouseHover;
+document.onmouseout = scaleDownMouseHover;
 
-dKey.addEventListener("click", () => {
-  document.getElementById("hihat").pause();
-  document.getElementById("hihat").currentTime = 0;
-  document.getElementById("hihat").play();
-});
+function scaleUpMouseClick(e) {
+  let code = parseInt(e.path[1].id);
+  document.getElementById(`${code}`).style.transform = "scale(1.3)";
+  document.getElementById(`${code}`).style.color = "#FFFFFF";
+  document.getElementById(`${code}`).style.fontWeight = "700";
+}
 
-fKey.addEventListener("click", () => {
-  document.getElementById("kick").pause();
-  document.getElementById("kick").currentTime = 0;
-  document.getElementById("kick").play();
-});
-gKey.addEventListener("click", () => {
-  document.getElementById("openhat").pause();
-  document.getElementById("openhat").currentTime = 0;
-  document.getElementById("openhat").play();
-});
+function scaleDownMouseClick(e) {
+  let code = parseInt(e.path[1].id);
+  document.getElementById(`${code}`).style.transform = "scale(1)";
+  document.getElementById(`${code}`).style.color = "#000000";
+  document.getElementById(`${code}`).style.fontWeight = "500";
+}
 
-hKey.addEventListener("click", () => {
-  document.getElementById("ride").pause();
-  document.getElementById("ride").currentTime = 0;
-  document.getElementById("ride").play();
-});
+function scaleUpMouseHover(e) {
+  let code = parseInt(e.path[1].id);
+  document.getElementById(`${code}`).style.transform = "scale(1.3)";
+  document.getElementById(`${code}`).style.fontWeight = "700";
+}
 
-jKey.addEventListener("click", () => {
-  document.getElementById("snare").pause();
-  document.getElementById("snare").currentTime = 0;
-  document.getElementById("snare").play();
-});
-
-kKey.addEventListener("click", () => {
-  document.getElementById("tink").pause();
-  document.getElementById("tink").currentTime = 0;
-  document.getElementById("tink").play();
-});
-
-lKey.addEventListener("click", () => {
-  document.getElementById("tom").pause();
-  document.getElementById("tom").currentTime = 0;
-  document.getElementById("tom").play();
-});
+function scaleDownMouseHover(e) {
+  let code = parseInt(e.path[1].id);
+  document.getElementById(`${code}`).style.transform = "scale(1)";
+  document.getElementById(`${code}`).style.fontWeight = "500";
+}
